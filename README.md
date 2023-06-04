@@ -1,64 +1,108 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# Decameron API
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Este proyecto es una aplicación Laravel que muestra un servicio web API para obtener parámetros de tipos de habitación y acomodaciones en hoteles.
 
-## About Laravel
+## Requisitos previos
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Asegúrate de tener los siguientes requisitos previos antes de comenzar:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- PHP >= 7.4
+- Composer
+- PostgreSQL (instalado y configurado)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Instalación
 
-## Learning Laravel
+Sigue estos pasos para instalar y configurar el proyecto:
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+1. Clona el repositorio en tu máquina local:
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+```bash
+git clone https://github.com/joseiguti/decameron-api.git
+```
 
-## Laravel Sponsors
+2. Accede al directorio del proyecto:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+```bash
+cd decameron-api
+```
 
-### Premium Partners
+3. Ejecuta el siguiente comando para instalar las dependencias de Composer:
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+```bash
+composer install
+```
 
-## Contributing
+4. Crea un archivo de entorno .env a partir del archivo de ejemplo .env.example:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```bash
+cp .env.example .env
+```
 
-## Code of Conduct
+5. Genera una clave de aplicación:
+```bash
+php artisan key:generate
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### Configuración de la base de datos
 
-## Security Vulnerabilities
+Antes de ejecutar las migraciones, asegúrate de haber creado la base de datos en tu instalación local de PostgreSQL. Puedes utilizar una instalación existente o configurar una nueva base de datos. Asegúrate de tener acceso y los parámetros de conexión correctos para configurar Laravel.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Para configurar Laravel con tu base de datos PostgreSQL, sigue estos pasos:
 
-## License
+1. Abre el archivo '.env' en la raíz del proyecto.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+2. Busca las siguientes variables y actualízalas con los valores correspondientes de tu instalación de PostgreSQL:
+
+```bash
+DB_CONNECTION=pgsql
+DB_HOST=127.0.0.1
+DB_PORT=5432
+DB_DATABASE=nombre_de_la_base_de_datos
+DB_USERNAME=nombre_de_usuario
+DB_PASSWORD=contraseña
+```
+
+Asegúrate de proporcionar el nombre de la base de datos, el nombre de usuario y la contraseña correctos para tu instalación de PostgreSQL.
+
+Ten en cuenta que el host (DB_HOST) puede variar según tu configuración. En el ejemplo anterior, se usa 127.0.0.1 para indicar que la base de datos se encuentra en el servidor local. Asegúrate de ajustar esta configuración según corresponda.
+
+3. Guarda los cambios en el archivo '.env'.
+
+Una vez que hayas configurado correctamente los parámetros de conexión, puedes proceder a ejecutar las migraciones de la base de datos.
+
+### Ejecución de las Migraciones
+
+Para crear las tablas y los esquemas necesarios en la base de datos, ejecuta las migraciones de Laravel utilizando el siguiente comando:
+
+```bash
+php artisan migrate
+```
+
+Esto ejecutará todas las migraciones pendientes y creará las tablas correspondientes en la base de datos configurada.
+
+Después de ejecutar las migraciones, puedes probar el servicio accediendo a la siguiente URL:
+
+URL: http://localhost:8000/api/parameters
+
+Recibirás una respuesta JSON similar a la siguiente:
+
+```json lines
+[{"id":1,"nombre":"Estándar","acomodaciones":[{"id":1,"nombre":"Sencilla","pivot":{"tipo_habitacion_id":1,"acomodacion_id":1}},{"id":2,"nombre":"Doble","pivot":{"tipo_habitacion_id":1,"acomodacion_id":2}}]},{"id":2,"nombre":"Junior","acomodaciones":[{"id":3,"nombre":"Triple","pivot":{"tipo_habitacion_id":2,"acomodacion_id":3}},{"id":4,"nombre":"Cuádruple","pivot":{"tipo_habitacion_id":2,"acomodacion_id":4}}]},{"id":3,"nombre":"Suite","acomodaciones":[{"id":1,"nombre":"Sencilla","pivot":{"tipo_habitacion_id":3,"acomodacion_id":1}},{"id":2,"nombre":"Doble","pivot":{"tipo_habitacion_id":3,"acomodacion_id":2}},{"id":3,"nombre":"Triple","pivot":{"tipo_habitacion_id":3,"acomodacion_id":3}}]}]
+```
+
+### Ejecutar la Aplicación
+
+Para ejecutar la aplicación Laravel, puedes utilizar el siguiente comando:
+
+```bash
+php artisan serve
+```
+
+Esto iniciará el servidor de desarrollo de Laravel y podrás acceder a la aplicación en la siguiente URL:
+
+http://localhost:8000
+
+¡Listo! Ahora tienes la aplicación Laravel configurada y funcionando correctamente en tu máquina local.
+
+Por favor ahora inicia el proyecto Front.
+https://github.com/joseiguti/decameron-front
